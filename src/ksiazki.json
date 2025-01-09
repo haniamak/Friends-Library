@@ -34,5 +34,11 @@
         "autor": "Lucy Maud Montgomery",
         "tytul": "Ania z zielonego wzgórza",
         "rok_wydania": 1908
+    },
+    {
+        "id": 7,
+        "autor": "Hania",
+        "tytul": "test",
+        "rok_wydania": 29
     }
 ]

@@ -27,6 +27,15 @@ class Ksiazka(Base):
 
   def __repr__(self):
     return f"Ksiazka(id={self.id}, autor='{self.autor}', tytul='{self.tytul}',  rok_wydania={self.rok_wydania})"
+  
+  def __init__(self, autor, tytul, rok_wydania):
+        if rok_wydania <= 0:
+          raise ValueError("Rok wydania musi być dodatni.")
+        if not autor.strip():
+          raise ValueError("Autor nie może być pusty.")
+        self.autor = autor
+        self.tytul = tytul
+        self.rok_wydania = rok_wydania
 
 class Przyjaciel(Base):
   __tablename__ = 'Przyjaciele'
