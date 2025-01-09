@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "imie": "Hania",
+        "email": "hania@mak.com"
+    },
+    {
+        "id": 2,
+        "imie": "Piotr",
+        "email": "piotr.nowak@example.com"
+    },
+    {
+        "id": 3,
+        "imie": "Kasia",
+        "email": "kasia.kowalska@domain.pl"
+    },
+    {
+        "id": 4,
+        "imie": "Olek",
+        "email": "olek@op.pl"
+    },
+    {
+        "id": 5,
+        "imie": "Marek",
+        "email": "mm@gmail.com"
+    },
+    {
+        "id": 6,
+        "imie": "max",
+        "email": "m@k.com"
+    }
+]

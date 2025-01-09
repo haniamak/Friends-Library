@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "autor": "Adam Mickiewicz",
+        "tytul": "Pan Tadeusz",
+        "rok_wydania": 1834
+    },
+    {
+        "id": 2,
+        "autor": "Henryk Sienkiewicz",
+        "tytul": "Quo Vadis",
+        "rok_wydania": 1896
+    },
+    {
+        "id": 3,
+        "autor": "Bolesław Prus",
+        "tytul": "Lalka",
+        "rok_wydania": 1890
+    },
+    {
+        "id": 4,
+        "autor": "Lewis Carroll",
+        "tytul": "Alicja w Krainie czarów",
+        "rok_wydania": 1864
+    },
+    {
+        "id": 5,
+        "autor": "Fiodor Dostojewski",
+        "tytul": "Idiota",
+        "rok_wydania": 1869
+    },
+    {
+        "id": 6,
+        "autor": "Lucy Maud Montgomery",
+        "tytul": "Ania z zielonego wzgórza",
+        "rok_wydania": 1908
+    }
+]
