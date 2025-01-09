@@ -49,6 +49,14 @@ class Przyjaciel(Base):
 
   def __repr__(self):
     return f"Przyjaciel(id={self.id}, imie='{self.imie}', email='{self.email}')"
+  
+  def __init__(self, imie, email):
+        if not imie.strip():
+          raise ValueError("Imie nie może być puste.")
+        if not email:
+          raise ValueError("Email nie może być pusty.")
+        self.imie = imie
+        self.email = email
 
 class Wypozyczenie(Base):
   __tablename__ = 'Wypozyczenia'
