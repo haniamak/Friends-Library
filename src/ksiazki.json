@@ -40,5 +40,11 @@
         "autor": "Hania",
         "tytul": "test",
         "rok_wydania": 29
+    },
+    {
+        "id": 8,
+        "autor": "Jan",
+        "tytul": "test2",
+        "rok_wydania": 2024
     }
 ]
