@@ -66,7 +66,7 @@ class Przyjaciel(Base):
         return (
             f"Przyjaciel("
             f"id={self.id}, imie='{self.imie}', "
-            f" email='{self.email}')"
+            f"email='{self.email}')"
             )
 
     def __init__(self, imie, email):

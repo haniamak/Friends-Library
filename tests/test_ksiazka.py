@@ -1,14 +1,10 @@
-# import sys
-# sys.path.insert(0, '../src')
-# import unittest
-# from src.operacje import Ksiazka
-
-from src.operacje import Ksiazka
-import unittest
+import sys
+#sys.path.insert(0, '../src')
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+import unittest
+from operacje import Ksiazka
 
 class TestKsiazka(unittest.TestCase):
     def test_ksiazka_repr(self):

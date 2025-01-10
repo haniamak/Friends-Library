@@ -10,4 +10,4 @@ python -u "tests\run_tests.py"
 pycodestyle src/operacje.py
 
 ## to make changes into the file:
-autopep8 --in-place --aggressive --aggressive --max-line-length=79 src/operacje.py  
+autopep8 --in-place --aggressive --aggressive --max-line-length=79 src/operacje.py
