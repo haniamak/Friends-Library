@@ -5,9 +5,9 @@ from sqlalchemy import CheckConstraint, ForeignKeyConstraint
 from sqlalchemy import create_engine, Column, Integer, ForeignKey, String
 from sqlalchemy.orm import DeclarativeBase, relationship
 import argparse
+from sqlalchemy.engine import Engine
 
-
-def create_engine_sqlalchemy():
+def create_engine_sqlalchemy() -> Engine:
     """
     Tworzy silnik do połączenia z bazą danych SQL Server.
 
@@ -39,10 +39,10 @@ class Ksiazka(Base):
     :param rok_wydania: Rok wydania książki (liczba całkowita, musi być > 0).
     """
     __tablename__ = 'Ksiazki'
-    id = Column(Integer, primary_key=True)
-    autor = Column(String, nullable=False)
-    tytul = Column(String, nullable=False)
-    rok_wydania = Column(Integer, nullable=False)
+    id: Column[int] = Column(Integer, primary_key=True)
+    autor: Column[str] = Column(String, nullable=False)
+    tytul: Column[str] = Column(String, nullable=False)
+    rok_wydania: Column[int] = Column(Integer, nullable=False)
 
     wypozyczenia = relationship('Wypozyczenie', back_populates='ksiazka')
 
@@ -57,7 +57,7 @@ class Ksiazka(Base):
             f"rok_wydania={self.rok_wydania})"
             )
 
-    def __init__(self, autor, tytul, rok_wydania):
+    def __init__(self, autor: Column[str], tytul: Column[str], rok_wydania: Column[int]):
         """
         Konstruktor klasy Ksiazka.
 
@@ -84,9 +84,9 @@ class Przyjaciel(Base):
     :param email: Email przyjaciela (tekst, wymagany, unikalny).
     """
     __tablename__ = 'Przyjaciele'
-    id = Column(Integer, primary_key=True)
-    imie = Column(String(255), nullable=False)
-    email = Column(String(255), nullable=False, unique=True)
+    id: Column[int] = Column(Integer, primary_key=True)
+    imie: Column[str] = Column(String(255), nullable=False)
+    email: Column[str] = Column(String(255), nullable=False, unique=True)
 
     wypozyczenia = relationship('Wypozyczenie', back_populates='przyjaciel')
 
@@ -100,7 +100,7 @@ class Przyjaciel(Base):
             f"email='{self.email}')"
             )
 
-    def __init__(self, imie, email):
+    def __init__(self, imie: Column[str], email: Column[str]):
         """
         Konstruktor klasy Przyjaciel.
 
@@ -126,11 +126,11 @@ class Wypozyczenie(Base):
     :param data_wypozyczenia: Data wypożyczenia książki (domyślnie bieżąca data).
     """
     __tablename__ = 'Wypozyczenia'
-    id = Column(Integer, primary_key=True)
-    ksiazka_id = Column(Integer, ForeignKey('Ksiazki.id'), nullable=False)
-    przyjaciel_id = Column(Integer, ForeignKey(
+    id: Column[int] = Column(Integer, primary_key=True)
+    ksiazka_id: Column[int] = Column(Integer, ForeignKey('Ksiazki.id'), nullable=False)
+    przyjaciel_id: Column[int] = Column(Integer, ForeignKey(
         'Przyjaciele.id'), nullable=False)
-    data_wypozyczenia = Column(
+    data_wypozyczenia: Column[str] = Column(
         String, nullable=False, default=datetime.now().strftime("%Y-%m-%d"))
 
     ksiazka = relationship('Ksiazka', back_populates='wypozyczenia')
@@ -148,7 +148,7 @@ class Wypozyczenie(Base):
         )
 
 
-def stworz_tabele(engine):
+def stworz_tabele(engine: Engine) -> None:
     """
     Tworzy wszystkie tabele w bazie danych na podstawie zdefiniowanych modeli.
 
@@ -157,7 +157,7 @@ def stworz_tabele(engine):
     Base.metadata.create_all(engine)
 
 
-def dodaj_ksiazke(session, autor, tytul, rok_wydania):
+def dodaj_ksiazke(session, autor: Column[str], tytul: Column[str], rok_wydania: Column[int]) -> None:
     """
     Dodaje nową książkę do bazy danych i zapisuje dane do pliku JSON.
 
@@ -177,7 +177,7 @@ def dodaj_ksiazke(session, autor, tytul, rok_wydania):
         json.dump(ksiazki_json, f, ensure_ascii=False, indent=4)
 
 
-def dodaj_przyjaciela(session, imie, email):
+def dodaj_przyjaciela(session, imie: Column[str], email: Column[str]) -> None:
     """
     Dodaje nowego przyjaciela do bazy danych, zapisuje zmiany 
     i aktualizuje plik JSON z listą przyjaciół.
@@ -197,7 +197,7 @@ def dodaj_przyjaciela(session, imie, email):
         json.dump(przyjaciele_json, f, ensure_ascii=False, indent=4)
 
 
-def wypozycz_ksiazke(session, ksiazka_id, przyjaciel_id):
+def wypozycz_ksiazke(session, ksiazka_id: Column[int], przyjaciel_id: Column[int]) -> None:
     """
     Wypożycza książkę przyjacielowi, jeśli książka nie jest już wypożyczona.
     
@@ -234,7 +234,7 @@ def wypozycz_ksiazke(session, ksiazka_id, przyjaciel_id):
         json.dump(wypozyczenia_json, f, ensure_ascii=False, indent=4)
 
 
-def oddaj_ksiazke(session, ksiazka_id):
+def oddaj_ksiazke(session, ksiazka_id: Column[int]) -> None:
     """
     Przyjmuje sesję bazy danych oraz identyfikator książki,
     a następnie sprawdza, czy książka jest wypożyczona. Jeśli tak, dokonuje zwrotu
@@ -261,7 +261,7 @@ def oddaj_ksiazke(session, ksiazka_id):
         print("Ksiazka nie jest aktualnie wypozyczona.")
 
 
-def lista_ksiazek(session):
+def lista_ksiazek(session) -> None:
     """
     Pobiera listę wszystkich książek z bazy danych i wypisuje je na konsolę.
 
@@ -272,7 +272,7 @@ def lista_ksiazek(session):
         print(ksiazka)
 
 
-def lista_przyjaciol(session):
+def lista_przyjaciol(session) -> None:
     """
     Pobiera listę wszystkich przyjaciół z bazy danych i wypisuje ich na konsolę.
 
@@ -284,7 +284,7 @@ def lista_przyjaciol(session):
         print(przyjaciel)
 
 
-def zaladuj_dane_z_plikow(session):
+def zaladuj_dane_z_plikow(session) -> None:
     """
     Ładuje dane z plików JSON i dodaje je do sesji.
     Otwiera trzy pliki JSON: 'ksiazki.json', 'przyjaciele.json' oraz 'wypozyczenia.json'.
@@ -312,7 +312,7 @@ def zaladuj_dane_z_plikow(session):
             session, wypozyczenie["ksiazka_id"], wypozyczenie["przyjaciel_id"])
 
 
-def stworz_parser():
+def stworz_parser() -> argparse.ArgumentParser:
     """
     Tworzy parser argumentów wykorzystywany w aplikacji
     """

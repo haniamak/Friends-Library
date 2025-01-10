@@ -9,7 +9,7 @@ python -u "tests\run_tests.py"
 ## to check compliance with pep8:
 pycodestyle src/operacje.py
 
-## to make changes into the file:
+## to make changes into the file(pep8):
 autopep8 --in-place --aggressive --aggressive --max-line-length=79 src/operacje.py
 
 ## to generate documentation:

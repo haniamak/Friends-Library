@@ -1,3 +1,5 @@
+from flask import Response, make_response
+from flask.typing import ResponseReturnValue
 from flask import Flask, jsonify, request
 from sqlalchemy.orm import sessionmaker, scoped_session
 from operacje import create_engine_sqlalchemy, Ksiazka, Base
@@ -10,7 +12,7 @@ SessionLocal = scoped_session(sessionmaker(bind=engine))
 
 
 @app.route('/')
-def home():
+def home() -> str:
     """
     Endpoint dla strony głównej.
     :return: Prosty tekst HTML z tytułem aplikacji.
@@ -19,7 +21,7 @@ def home():
 
 
 @app.route('/ksiazki', methods=['GET'])
-def get_all_ksiazki():
+def get_all_ksiazki() -> ResponseReturnValue:
     """
     Endpoint do pobierania listy wszystkich książek.
     :return: Lista książek w formacie JSON.
@@ -32,11 +34,11 @@ def get_all_ksiazki():
             "tytul": ksiazka.tytul,
             "rok_wydania": ksiazka.rok_wydania
         } for ksiazka in ksiazki]
-        return jsonify(ksiazki_list)
+        return jsonify(ksiazki_list), 200
 
 
 @app.route('/ksiazka/<int:id>', methods=['GET'])
-def get_ksiazka(id):
+def get_ksiazka(id: int) -> ResponseReturnValue:
     """
     Endpoint do pobierania szczegółów konkretnej książki na podstawie jej ID.
     :param id: ID książki.
@@ -50,13 +52,13 @@ def get_ksiazka(id):
                 "autor": ksiazka.autor,
                 "tytul": ksiazka.tytul,
                 "rok_wydania": ksiazka.rok_wydania
-            })
+            }), 200
         else:
             return jsonify({"message": "Ksiazka nie istnieje."}), 404
 
 
 @app.route('/ksiazka/<int:id>', methods=['DELETE'])
-def delete_ksiazka(id):
+def delete_ksiazka(id: int) -> ResponseReturnValue:
     """
     Endpoint do usuwania książki na podstawie jej ID.
     :param id: ID książki do usunięcia.
@@ -68,14 +70,14 @@ def delete_ksiazka(id):
             session.delete(ksiazka)
             session.commit()
             print(f"Usunieto ksiazke: {ksiazka}")
-            return jsonify({'status': 'OK'})
+            return jsonify({'message': 'OK'}), 204
         else:
             return jsonify({"message": "Ksiazka nie istnieje."}), 404
 
 
 @app.route('/ksiazka/<string:autor>/<string:tytul>/<int:rok_wydania>',
            methods=['POST'])
-def dodaj_ksiazke(autor, tytul, rok_wydania):
+def dodaj_ksiazke(autor: str, tytul: str, rok_wydania: int) -> ResponseReturnValue:
     """
     Endpoint do dodawania nowej książki.
     :param autor: Autor książki.
@@ -88,11 +90,11 @@ def dodaj_ksiazke(autor, tytul, rok_wydania):
         session.add(ksiazka)
         session.commit()
         print(f"Dodano ksiazke: {ksiazka}")
-        return jsonify({'status': 'OK'})
+        return jsonify({'message': 'OK'}), 204
 
 
 @app.route('/ksiazka/<int:id>', methods=['PUT'])
-def update_ksiazka(id):
+def update_ksiazka(id: int) -> ResponseReturnValue:
     """
     Endpoint do aktualizowania szczegółów istniejącej książki.
     :param id: ID książki do zaktualizowania.
@@ -101,15 +103,17 @@ def update_ksiazka(id):
     with SessionLocal() as session:
         ksiazka = session.query(Ksiazka).get(id)
         if ksiazka:
-            ksiazka.autor = request.json['autor']
-            ksiazka.tytul = request.json['tytul']
-            ksiazka.rok_wydania = request.json['rok_wydania']
-            session.commit()
-            print(f"Zaktualizowano ksiazke: {ksiazka}")
-            return jsonify({'status': 'OK'})
+            if not request.json is None:
+                ksiazka.autor = request.json['autor']
+                ksiazka.tytul = request.json['tytul']
+                ksiazka.rok_wydania = request.json['rok_wydania']
+                session.commit()
+                print(f"Zaktualizowano ksiazke: {ksiazka}")
+                return jsonify({'message': 'OK'}), 204
+            else:
+                return jsonify({'message': 'Brak danych do aktualizacji.'}), 400
         else:
             return jsonify({"message": "Ksiazka nie istnieje."}), 404
-
 
 if __name__ == "__main__":
     """

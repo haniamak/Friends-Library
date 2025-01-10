@@ -6,9 +6,10 @@ from operacje import create_engine_sqlalchemy, stworz_tabele
 from operacje import Base, stworz_parser, dodaj_ksiazke
 from operacje import dodaj_przyjaciela, wypozycz_ksiazke, oddaj_ksiazke
 from operacje import lista_ksiazek, lista_przyjaciol, zaladuj_dane_z_plikow
+from argparse import Namespace
 
 
-def main():
+def main() -> None:
     engine = create_engine_sqlalchemy()
     Base.metadata.drop_all(engine)
     stworz_tabele(engine)
@@ -27,7 +28,7 @@ def main():
         os.system('cls' if os.name == 'nt' else 'clear')
 
         parser = stworz_parser()
-        args = parser.parse_args()
+        args: Namespace = parser.parse_args()
 
         if args.command == 'api':
             url = 'http://127.0.0.1:5000'
