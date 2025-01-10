@@ -11,11 +11,19 @@ SessionLocal = scoped_session(sessionmaker(bind=engine))
 
 @app.route('/')
 def home():
+    """
+    Endpoint dla strony głównej.
+    :return: Prosty tekst HTML z tytułem aplikacji.
+    """
     return "<h1>Przyjacielskie wypozyczenia ksiazek</h1>"
 
 
 @app.route('/ksiazki', methods=['GET'])
 def get_all_ksiazki():
+    """
+    Endpoint do pobierania listy wszystkich książek.
+    :return: Lista książek w formacie JSON.
+    """
     with SessionLocal() as session:
         ksiazki = session.query(Ksiazka).all()
         ksiazki_list = [{
@@ -29,6 +37,11 @@ def get_all_ksiazki():
 
 @app.route('/ksiazka/<int:id>', methods=['GET'])
 def get_ksiazka(id):
+    """
+    Endpoint do pobierania szczegółów konkretnej książki na podstawie jej ID.
+    :param id: ID książki.
+    :return: Szczegóły książki w formacie JSON lub komunikat o błędzie, jeśli książka nie istnieje.
+    """
     with SessionLocal() as session:
         ksiazka = session.query(Ksiazka).filter_by(id=id).first()
         if ksiazka:
@@ -44,6 +57,11 @@ def get_ksiazka(id):
 
 @app.route('/ksiazka/<int:id>', methods=['DELETE'])
 def delete_ksiazka(id):
+    """
+    Endpoint do usuwania książki na podstawie jej ID.
+    :param id: ID książki do usunięcia.
+    :return: Status operacji w formacie JSON lub komunikat o błędzie, jeśli książka nie istnieje.
+    """
     with SessionLocal() as session:
         ksiazka = session.query(Ksiazka).get(id)
         if ksiazka:
@@ -58,6 +76,13 @@ def delete_ksiazka(id):
 @app.route('/ksiazka/<string:autor>/<string:tytul>/<int:rok_wydania>',
            methods=['POST'])
 def dodaj_ksiazke(autor, tytul, rok_wydania):
+    """
+    Endpoint do dodawania nowej książki.
+    :param autor: Autor książki.
+    :param tytul: Tytuł książki.
+    :param rok_wydania: Rok wydania książki.
+    :return: Status operacji w formacie JSON.
+    """
     with SessionLocal() as session:
         ksiazka = Ksiazka(autor=autor, tytul=tytul, rok_wydania=rok_wydania)
         session.add(ksiazka)
@@ -68,6 +93,11 @@ def dodaj_ksiazke(autor, tytul, rok_wydania):
 
 @app.route('/ksiazka/<int:id>', methods=['PUT'])
 def update_ksiazka(id):
+    """
+    Endpoint do aktualizowania szczegółów istniejącej książki.
+    :param id: ID książki do zaktualizowania.
+    :return: Status operacji w formacie JSON lub komunikat o błędzie, jeśli książka nie istnieje.
+    """
     with SessionLocal() as session:
         ksiazka = session.query(Ksiazka).get(id)
         if ksiazka:
@@ -82,4 +112,7 @@ def update_ksiazka(id):
 
 
 if __name__ == "__main__":
+    """
+    Uruchamia aplikację Flask na domyślnym porcie 5000.
+    """
     app.run()

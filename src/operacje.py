@@ -8,6 +8,11 @@ import argparse
 
 
 def create_engine_sqlalchemy():
+    """
+    Tworzy silnik do połączenia z bazą danych SQL Server.
+
+    :return: Obiekt silnika SQLAlchemy (engine).
+    """
     server = 'LAPTOP-KS5QVHTA\\SQLEXPRESS'
     database = 'Python'
     engine = create_engine(
@@ -18,10 +23,21 @@ def create_engine_sqlalchemy():
 
 
 class Base(DeclarativeBase):
+    """
+    Bazowa klasa dla wszystkich modeli SQLAlchemy.
+    """
     pass
 
 
 class Ksiazka(Base):
+    """
+    Reprezentuje tabelę 'Ksiazki' w bazie danych.
+
+    :param id: Klucz główny (unikalny identyfikator książki).
+    :param autor: Autor książki (tekst, wymagany).
+    :param tytul: Tytuł książki (tekst, wymagany).
+    :param rok_wydania: Rok wydania książki (liczba całkowita, musi być > 0).
+    """
     __tablename__ = 'Ksiazki'
     id = Column(Integer, primary_key=True)
     autor = Column(String, nullable=False)
@@ -42,6 +58,14 @@ class Ksiazka(Base):
             )
 
     def __init__(self, autor, tytul, rok_wydania):
+        """
+        Konstruktor klasy Ksiazka.
+
+        :param autor: Autor książki.
+        :param tytul: Tytuł książki.
+        :param rok_wydania: Rok wydania książki (musi być > 0).
+        :raises ValueError: Jeśli rok wydania jest niedodatni lub autor jest pusty.
+        """
         if rok_wydania <= 0:
             raise ValueError("Rok wydania musi być dodatni.")
         if not autor.strip():
@@ -52,6 +76,13 @@ class Ksiazka(Base):
 
 
 class Przyjaciel(Base):
+    """
+    Reprezentuje tabelę 'Przyjaciele' w bazie danych.
+
+    :param id: Klucz główny (unikalny identyfikator przyjaciela).
+    :param imie: Imię przyjaciela (tekst, wymagany).
+    :param email: Email przyjaciela (tekst, wymagany, unikalny).
+    """
     __tablename__ = 'Przyjaciele'
     id = Column(Integer, primary_key=True)
     imie = Column(String(255), nullable=False)
@@ -70,6 +101,13 @@ class Przyjaciel(Base):
             )
 
     def __init__(self, imie, email):
+        """
+        Konstruktor klasy Przyjaciel.
+
+        :param imie: Imię przyjaciela.
+        :param email: Email przyjaciela.
+        :raises ValueError: Jeśli imię lub email są puste.
+        """
         if not imie.strip():
             raise ValueError("Imie nie może być puste.")
         if not email:
@@ -79,6 +117,14 @@ class Przyjaciel(Base):
 
 
 class Wypozyczenie(Base):
+    """
+    Reprezentuje tabelę 'Wypozyczenia' w bazie danych.
+
+    :param id: Klucz główny (unikalny identyfikator wypożyczenia).
+    :param ksiazka_id: Id książki powiązanej z wypożyczeniem.
+    :param przyjaciel_id: Id przyjaciela powiązanego z wypożyczeniem.
+    :param data_wypozyczenia: Data wypożyczenia książki (domyślnie bieżąca data).
+    """
     __tablename__ = 'Wypozyczenia'
     id = Column(Integer, primary_key=True)
     ksiazka_id = Column(Integer, ForeignKey('Ksiazki.id'), nullable=False)
@@ -103,10 +149,23 @@ class Wypozyczenie(Base):
 
 
 def stworz_tabele(engine):
+    """
+    Tworzy wszystkie tabele w bazie danych na podstawie zdefiniowanych modeli.
+
+    :param engine: Obiekt silnika SQLAlchemy.
+    """
     Base.metadata.create_all(engine)
 
 
 def dodaj_ksiazke(session, autor, tytul, rok_wydania):
+    """
+    Dodaje nową książkę do bazy danych i zapisuje dane do pliku JSON.
+
+    :param session: Sesja bazy danych SQLAlchemy.
+    :param autor: Autor książki.
+    :param tytul: Tytuł książki.
+    :param rok_wydania: Rok wydania książki.
+    """
     ksiazka = Ksiazka(autor=autor, tytul=tytul, rok_wydania=rok_wydania)
     session.add(ksiazka)
     session.commit()
@@ -119,6 +178,14 @@ def dodaj_ksiazke(session, autor, tytul, rok_wydania):
 
 
 def dodaj_przyjaciela(session, imie, email):
+    """
+    Dodaje nowego przyjaciela do bazy danych, zapisuje zmiany 
+    i aktualizuje plik JSON z listą przyjaciół.
+
+    :param session: Sesja bazy danych SQLAlchemy.
+    :param imie: Imię nowego przyjaciela.
+    :param email: Adres email nowego przyjaciela.
+    """
     przyjaciel = Przyjaciel(imie=imie, email=email)
     session.add(przyjaciel)
     session.commit()
@@ -131,6 +198,13 @@ def dodaj_przyjaciela(session, imie, email):
 
 
 def wypozycz_ksiazke(session, ksiazka_id, przyjaciel_id):
+    """
+    Wypożycza książkę przyjacielowi, jeśli książka nie jest już wypożyczona.
+    
+    :param session: Sesja bazy danych SQLAlchemy.
+    :param ksiazka_id: ID książki do wypożyczenia.
+    :param przyjaciel_id: ID przyjaciela wypożyczającego książkę.
+    """
     czy_wypozyczona = session.query(Wypozyczenie).filter_by(
         ksiazka_id=ksiazka_id).first()
     if czy_wypozyczona:
@@ -145,7 +219,7 @@ def wypozycz_ksiazke(session, ksiazka_id, przyjaciel_id):
     przyjaciel = session.get(Przyjaciel, przyjaciel_id)
 
     print(
-        f"Wypozyczono ksiazke: {ksiazka.tytul}"
+        f"Wypozyczono ksiazke: {ksiazka.tytul} "
         f"od {przyjaciel.imie} ({przyjaciel.email})")
     wypozyczenia = session.query(Wypozyczenie).all()
     wypozyczenia_json = [
@@ -161,6 +235,14 @@ def wypozycz_ksiazke(session, ksiazka_id, przyjaciel_id):
 
 
 def oddaj_ksiazke(session, ksiazka_id):
+    """
+    Przyjmuje sesję bazy danych oraz identyfikator książki,
+    a następnie sprawdza, czy książka jest wypożyczona. Jeśli tak, dokonuje zwrotu
+    książki, aktualizuje bazę danych oraz plik JSON z wypożyczeniami.
+
+    :param session: Sesja bazy danych SQLAlchemy.
+    :param ksiazka_id: Identyfikator książki do zwrotu.
+    """
     czy_wypozyczona = session.query(Wypozyczenie).filter_by(
         ksiazka_id=ksiazka_id).first()
     if czy_wypozyczona:
@@ -180,18 +262,37 @@ def oddaj_ksiazke(session, ksiazka_id):
 
 
 def lista_ksiazek(session):
+    """
+    Pobiera listę wszystkich książek z bazy danych i wypisuje je na konsolę.
+
+    :param session: Sesja bazy danych SQLAlchemy.
+    """
     ksiazki = session.query(Ksiazka).all()
     for ksiazka in ksiazki:
         print(ksiazka)
 
 
 def lista_przyjaciol(session):
+    """
+    Pobiera listę wszystkich przyjaciół z bazy danych i wypisuje ich na konsolę.
+
+    :param session: Sesja bazy danych SQLAlchemy.
+
+    """
     przyjaciele = session.query(Przyjaciel).all()
     for przyjaciel in przyjaciele:
         print(przyjaciel)
 
 
 def zaladuj_dane_z_plikow(session):
+    """
+    Ładuje dane z plików JSON i dodaje je do sesji.
+    Otwiera trzy pliki JSON: 'ksiazki.json', 'przyjaciele.json' oraz 'wypozyczenia.json'.
+    Następnie ładuje dane z tych plików i dodaje je do sesji za pomocą odpowiednich funkcji:
+    `dodaj_ksiazke`, `dodaj_przyjaciela` oraz `wypozycz_ksiazke`.
+
+    :param session: Sesja bazy danych SQLAlchemy.
+    """
     with open('ksiazki.json', 'r', encoding='utf-8') as f:
         ksiazki = json.load(f)
     with open('przyjaciele.json', 'r', encoding='utf-8') as f:
@@ -212,6 +313,9 @@ def zaladuj_dane_z_plikow(session):
 
 
 def stworz_parser():
+    """
+    Tworzy parser argumentów wykorzystywany w aplikacji
+    """
     parser = argparse.ArgumentParser(
         description='Przyjacielskie wypozyczenia ksiazek')
     subparsers = parser.add_subparsers(

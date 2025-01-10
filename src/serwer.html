@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module serwer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>serwer</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Channa%5Cdesktop%5Cfriends-library%5Csrc%5Cserwer.py">c:\users\hanna\desktop\friends-library\src\serwer.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-delete_ksiazka"><strong>delete_ksiazka</strong></a>(id)</dt><dd><tt>Endpoint&nbsp;do&nbsp;usuwania&nbsp;książki&nbsp;na&nbsp;podstawie&nbsp;jej&nbsp;ID.<br>
+:param&nbsp;id:&nbsp;ID&nbsp;książki&nbsp;do&nbsp;usunięcia.<br>
+:return:&nbsp;Status&nbsp;operacji&nbsp;w&nbsp;formacie&nbsp;JSON&nbsp;lub&nbsp;komunikat&nbsp;o&nbsp;błędzie,&nbsp;jeśli&nbsp;książka&nbsp;nie&nbsp;istnieje.</tt></dd></dl>
+ <dl><dt><a name="-dodaj_ksiazke"><strong>dodaj_ksiazke</strong></a>(autor, tytul, rok_wydania)</dt><dd><tt>Endpoint&nbsp;do&nbsp;dodawania&nbsp;nowej&nbsp;książki.<br>
+:param&nbsp;autor:&nbsp;Autor&nbsp;książki.<br>
+:param&nbsp;tytul:&nbsp;Tytuł&nbsp;książki.<br>
+:param&nbsp;rok_wydania:&nbsp;Rok&nbsp;wydania&nbsp;książki.<br>
+:return:&nbsp;Status&nbsp;operacji&nbsp;w&nbsp;formacie&nbsp;JSON.</tt></dd></dl>
+ <dl><dt><a name="-get_all_ksiazki"><strong>get_all_ksiazki</strong></a>()</dt><dd><tt>Endpoint&nbsp;do&nbsp;pobierania&nbsp;listy&nbsp;wszystkich&nbsp;książek.<br>
+:return:&nbsp;Lista&nbsp;książek&nbsp;w&nbsp;formacie&nbsp;JSON.</tt></dd></dl>
+ <dl><dt><a name="-get_ksiazka"><strong>get_ksiazka</strong></a>(id)</dt><dd><tt>Endpoint&nbsp;do&nbsp;pobierania&nbsp;szczegółów&nbsp;konkretnej&nbsp;książki&nbsp;na&nbsp;podstawie&nbsp;jej&nbsp;ID.<br>
+:param&nbsp;id:&nbsp;ID&nbsp;książki.<br>
+:return:&nbsp;Szczegóły&nbsp;książki&nbsp;w&nbsp;formacie&nbsp;JSON&nbsp;lub&nbsp;komunikat&nbsp;o&nbsp;błędzie,&nbsp;jeśli&nbsp;książka&nbsp;nie&nbsp;istnieje.</tt></dd></dl>
+ <dl><dt><a name="-home"><strong>home</strong></a>()</dt><dd><tt>Endpoint&nbsp;dla&nbsp;strony&nbsp;głównej.<br>
+:return:&nbsp;Prosty&nbsp;tekst&nbsp;HTML&nbsp;z&nbsp;tytułem&nbsp;aplikacji.</tt></dd></dl>
+ <dl><dt><a name="-update_ksiazka"><strong>update_ksiazka</strong></a>(id)</dt><dd><tt>Endpoint&nbsp;do&nbsp;aktualizowania&nbsp;szczegółów&nbsp;istniejącej&nbsp;książki.<br>
+:param&nbsp;id:&nbsp;ID&nbsp;książki&nbsp;do&nbsp;zaktualizowania.<br>
+:return:&nbsp;Status&nbsp;operacji&nbsp;w&nbsp;formacie&nbsp;JSON&nbsp;lub&nbsp;komunikat&nbsp;o&nbsp;błędzie,&nbsp;jeśli&nbsp;książka&nbsp;nie&nbsp;istnieje.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>SessionLocal</strong> = &lt;sqlalchemy.orm.scoping.scoped_session object&gt;<br>
+<strong>app</strong> = &lt;Flask 'serwer'&gt;<br>
+<strong>engine</strong> = Engine(mssql+pyodbc://LAPTOP-KS5QVHTA\SQLEXPRESS/Python?driver=ODBC+Driver+17+for+SQL+Server)<br>
+<strong>request</strong> = &lt;LocalProxy unbound&gt;</td></tr></table>
+</body></html>

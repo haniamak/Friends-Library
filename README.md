@@ -11,3 +11,9 @@ pycodestyle src/operacje.py
 
 ## to make changes into the file:
 autopep8 --in-place --aggressive --aggressive --max-line-length=79 src/operacje.py
+
+## to generate documentation:
+python -m pydoc -w operacje
+
+## to check if typical annotations are correct:
+mypy file.py

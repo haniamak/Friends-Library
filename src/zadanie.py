@@ -3,9 +3,9 @@ import os
 from sqlalchemy.orm import Session
 import webbrowser
 from operacje import create_engine_sqlalchemy, stworz_tabele
-from operacje import Base, stworz_parser, dodaj_ksiazke, dodaj_przyjaciela
-from operacje import wypozycz_ksiazke, oddaj_ksiazke, lista_ksiazek
-from operacje import lista_przyjaciol, zaladuj_dane_z_plikow
+from operacje import Base, stworz_parser, dodaj_ksiazke
+from operacje import dodaj_przyjaciela, wypozycz_ksiazke, oddaj_ksiazke
+from operacje import lista_ksiazek, lista_przyjaciol, zaladuj_dane_z_plikow
 
 
 def main():

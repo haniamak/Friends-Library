@@ -1,0 +1,433 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module operacje</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>operacje</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Channa%5Cdesktop%5Cfriends-library%5Csrc%5Coperacje.py">c:\users\hanna\desktop\friends-library\src\operacje.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="argparse.html">argparse</a><br>
+</td><td width="25%" valign=top><a href="json.html">json</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>(<a href="sqlalchemy.inspection.html#Inspectable">sqlalchemy.inspection.Inspectable</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="operacje.html#Base">Base</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="operacje.html#Ksiazka">Ksiazka</a>
+</font></dt><dt><font face="helvetica, arial"><a href="operacje.html#Przyjaciel">Przyjaciel</a>
+</font></dt><dt><font face="helvetica, arial"><a href="operacje.html#Wypozyczenie">Wypozyczenie</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Base">class <strong>Base</strong></a>(<a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Base">Base</a>(**kwargs:&nbsp;'Any')&nbsp;-&amp;gt;&nbsp;'None'<br>
+&nbsp;<br>
+Bazowa&nbsp;klasa&nbsp;dla&nbsp;wszystkich&nbsp;modeli&nbsp;SQLAlchemy.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="operacje.html#Base">Base</a></dd>
+<dd><a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a></dd>
+<dd><a href="sqlalchemy.inspection.html#Inspectable">sqlalchemy.inspection.Inspectable</a></dd>
+<dd><a href="typing.html#Generic">typing.Generic</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Base-__init__"><strong>__init__</strong></a>(self: 'Any', **kwargs: 'Any') -&gt; 'None'</dt><dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+&nbsp;<br>
+Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+values&nbsp;in&nbsp;``kwargs``.<br>
+&nbsp;<br>
+Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+<dl><dt><strong>__parameters__</strong> = ()</dl>
+
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Class methods inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><a name="Base-__init_subclass__"><strong>__init_subclass__</strong></a>(**kw: 'Any') -&gt; 'None'<font color="#909090"><font face="helvetica, arial"> from <a href="sqlalchemy.orm.decl_api.html#DeclarativeAttributeIntercept">sqlalchemy.orm.decl_api.DeclarativeAttributeIntercept</a></font></font></dt><dd><tt>This&nbsp;method&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;class&nbsp;is&nbsp;subclassed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;implementation&nbsp;does&nbsp;nothing.&nbsp;It&nbsp;may&nbsp;be<br>
+overridden&nbsp;to&nbsp;extend&nbsp;subclasses.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><strong>__orig_bases__</strong> = (sqlalchemy.inspection.Inspectable[sqlalchemy.orm.state.InstanceState[typing.Any]],)</dl>
+
+<hr>
+Class methods inherited from <a href="typing.html#Generic">typing.Generic</a>:<br>
+<dl><dt><a name="Base-__class_getitem__"><strong>__class_getitem__</strong></a>(params)<font color="#909090"><font face="helvetica, arial"> from <a href="sqlalchemy.orm.decl_api.html#DeclarativeAttributeIntercept">sqlalchemy.orm.decl_api.DeclarativeAttributeIntercept</a></font></font></dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Ksiazka">class <strong>Ksiazka</strong></a>(<a href="operacje.html#Base">Base</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Ksiazka">Ksiazka</a>(autor,&nbsp;tytul,&nbsp;rok_wydania)<br>
+&nbsp;<br>
+Reprezentuje&nbsp;tabelę&nbsp;'Ksiazki'&nbsp;w&nbsp;bazie&nbsp;danych.<br>
+&nbsp;<br>
+:param&nbsp;id:&nbsp;Klucz&nbsp;główny&nbsp;(unikalny&nbsp;identyfikator&nbsp;książki).<br>
+:param&nbsp;autor:&nbsp;Autor&nbsp;książki&nbsp;(tekst,&nbsp;wymagany).<br>
+:param&nbsp;tytul:&nbsp;Tytuł&nbsp;książki&nbsp;(tekst,&nbsp;wymagany).<br>
+:param&nbsp;rok_wydania:&nbsp;Rok&nbsp;wydania&nbsp;książki&nbsp;(liczba&nbsp;całkowita,&nbsp;musi&nbsp;być&nbsp;&gt;&nbsp;0).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="operacje.html#Ksiazka">Ksiazka</a></dd>
+<dd><a href="operacje.html#Base">Base</a></dd>
+<dd><a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a></dd>
+<dd><a href="sqlalchemy.inspection.html#Inspectable">sqlalchemy.inspection.Inspectable</a></dd>
+<dd><a href="typing.html#Generic">typing.Generic</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Ksiazka-__init__"><strong>__init__</strong></a>(self, autor, tytul, rok_wydania)</dt><dd><tt>Konstruktor&nbsp;klasy&nbsp;<a href="#Ksiazka">Ksiazka</a>.<br>
+&nbsp;<br>
+:param&nbsp;autor:&nbsp;Autor&nbsp;książki.<br>
+:param&nbsp;tytul:&nbsp;Tytuł&nbsp;książki.<br>
+:param&nbsp;rok_wydania:&nbsp;Rok&nbsp;wydania&nbsp;książki&nbsp;(musi&nbsp;być&nbsp;&gt;&nbsp;0).<br>
+:raises&nbsp;ValueError:&nbsp;Jeśli&nbsp;rok&nbsp;wydania&nbsp;jest&nbsp;niedodatni&nbsp;lub&nbsp;autor&nbsp;jest&nbsp;pusty.</tt></dd></dl>
+
+<dl><dt><a name="Ksiazka-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>autor</strong></dt>
+</dl>
+<dl><dt><strong>id</strong></dt>
+</dl>
+<dl><dt><strong>rok_wydania</strong></dt>
+</dl>
+<dl><dt><strong>tytul</strong></dt>
+</dl>
+<dl><dt><strong>wypozyczenia</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1c1207d4c10; Ksiazka&gt;</dl>
+
+<dl><dt><strong>__parameters__</strong> = ()</dl>
+
+<dl><dt><strong>__table__</strong> = Table('Ksiazki', MetaData(), Column('id', Intege...), table=&lt;Ksiazki&gt;, nullable=False), schema=None)</dl>
+
+<dl><dt><strong>__table_args__</strong> = (CheckConstraint(&lt;sqlalchemy.sql.elements.BinaryE..., table=&lt;Ksiazki&gt;, nullable=False), schema=None)),)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'Ksiazki'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="operacje.html#Base">Base</a>:<br>
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Class methods inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><a name="Ksiazka-__init_subclass__"><strong>__init_subclass__</strong></a>(**kw: 'Any') -&gt; 'None'<font color="#909090"><font face="helvetica, arial"> from <a href="sqlalchemy.orm.decl_api.html#DeclarativeAttributeIntercept">sqlalchemy.orm.decl_api.DeclarativeAttributeIntercept</a></font></font></dt><dd><tt>This&nbsp;method&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;class&nbsp;is&nbsp;subclassed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;implementation&nbsp;does&nbsp;nothing.&nbsp;It&nbsp;may&nbsp;be<br>
+overridden&nbsp;to&nbsp;extend&nbsp;subclasses.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><strong>__orig_bases__</strong> = (sqlalchemy.inspection.Inspectable[sqlalchemy.orm.state.InstanceState[typing.Any]],)</dl>
+
+<hr>
+Class methods inherited from <a href="typing.html#Generic">typing.Generic</a>:<br>
+<dl><dt><a name="Ksiazka-__class_getitem__"><strong>__class_getitem__</strong></a>(params)<font color="#909090"><font face="helvetica, arial"> from <a href="sqlalchemy.orm.decl_api.html#DeclarativeAttributeIntercept">sqlalchemy.orm.decl_api.DeclarativeAttributeIntercept</a></font></font></dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Przyjaciel">class <strong>Przyjaciel</strong></a>(<a href="operacje.html#Base">Base</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Przyjaciel">Przyjaciel</a>(imie,&nbsp;email)<br>
+&nbsp;<br>
+Reprezentuje&nbsp;tabelę&nbsp;'Przyjaciele'&nbsp;w&nbsp;bazie&nbsp;danych.<br>
+&nbsp;<br>
+:param&nbsp;id:&nbsp;Klucz&nbsp;główny&nbsp;(unikalny&nbsp;identyfikator&nbsp;przyjaciela).<br>
+:param&nbsp;imie:&nbsp;Imię&nbsp;przyjaciela&nbsp;(tekst,&nbsp;wymagany).<br>
+:param&nbsp;email:&nbsp;Email&nbsp;przyjaciela&nbsp;(tekst,&nbsp;wymagany,&nbsp;unikalny).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="operacje.html#Przyjaciel">Przyjaciel</a></dd>
+<dd><a href="operacje.html#Base">Base</a></dd>
+<dd><a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a></dd>
+<dd><a href="sqlalchemy.inspection.html#Inspectable">sqlalchemy.inspection.Inspectable</a></dd>
+<dd><a href="typing.html#Generic">typing.Generic</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Przyjaciel-__init__"><strong>__init__</strong></a>(self, imie, email)</dt><dd><tt>Konstruktor&nbsp;klasy&nbsp;<a href="#Przyjaciel">Przyjaciel</a>.<br>
+&nbsp;<br>
+:param&nbsp;imie:&nbsp;Imię&nbsp;przyjaciela.<br>
+:param&nbsp;email:&nbsp;Email&nbsp;przyjaciela.<br>
+:raises&nbsp;ValueError:&nbsp;Jeśli&nbsp;imię&nbsp;lub&nbsp;email&nbsp;są&nbsp;puste.</tt></dd></dl>
+
+<dl><dt><a name="Przyjaciel-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>email</strong></dt>
+</dl>
+<dl><dt><strong>id</strong></dt>
+</dl>
+<dl><dt><strong>imie</strong></dt>
+</dl>
+<dl><dt><strong>wypozyczenia</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1c1207d4e50; Przyjaciel&gt;</dl>
+
+<dl><dt><strong>__parameters__</strong> = ()</dl>
+
+<dl><dt><strong>__table__</strong> = Table('Przyjaciele', MetaData(), Column('id', In...able=&lt;Przyjaciele&gt;, nullable=False), schema=None)</dl>
+
+<dl><dt><strong>__table_args__</strong> = (CheckConstraint(&lt;sqlalchemy.sql.elements.TextCla...ble=&lt;Przyjaciele&gt;, nullable=False), schema=None)),)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'Przyjaciele'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="operacje.html#Base">Base</a>:<br>
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Class methods inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><a name="Przyjaciel-__init_subclass__"><strong>__init_subclass__</strong></a>(**kw: 'Any') -&gt; 'None'<font color="#909090"><font face="helvetica, arial"> from <a href="sqlalchemy.orm.decl_api.html#DeclarativeAttributeIntercept">sqlalchemy.orm.decl_api.DeclarativeAttributeIntercept</a></font></font></dt><dd><tt>This&nbsp;method&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;class&nbsp;is&nbsp;subclassed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;implementation&nbsp;does&nbsp;nothing.&nbsp;It&nbsp;may&nbsp;be<br>
+overridden&nbsp;to&nbsp;extend&nbsp;subclasses.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><strong>__orig_bases__</strong> = (sqlalchemy.inspection.Inspectable[sqlalchemy.orm.state.InstanceState[typing.Any]],)</dl>
+
+<hr>
+Class methods inherited from <a href="typing.html#Generic">typing.Generic</a>:<br>
+<dl><dt><a name="Przyjaciel-__class_getitem__"><strong>__class_getitem__</strong></a>(params)<font color="#909090"><font face="helvetica, arial"> from <a href="sqlalchemy.orm.decl_api.html#DeclarativeAttributeIntercept">sqlalchemy.orm.decl_api.DeclarativeAttributeIntercept</a></font></font></dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Wypozyczenie">class <strong>Wypozyczenie</strong></a>(<a href="operacje.html#Base">Base</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Wypozyczenie">Wypozyczenie</a>(**kwargs)<br>
+&nbsp;<br>
+Reprezentuje&nbsp;tabelę&nbsp;'Wypozyczenia'&nbsp;w&nbsp;bazie&nbsp;danych.<br>
+&nbsp;<br>
+:param&nbsp;id:&nbsp;Klucz&nbsp;główny&nbsp;(unikalny&nbsp;identyfikator&nbsp;wypożyczenia).<br>
+:param&nbsp;ksiazka_id:&nbsp;Id&nbsp;książki&nbsp;powiązanej&nbsp;z&nbsp;wypożyczeniem.<br>
+:param&nbsp;przyjaciel_id:&nbsp;Id&nbsp;przyjaciela&nbsp;powiązanego&nbsp;z&nbsp;wypożyczeniem.<br>
+:param&nbsp;data_wypozyczenia:&nbsp;Data&nbsp;wypożyczenia&nbsp;książki&nbsp;(domyślnie&nbsp;bieżąca&nbsp;data).<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="operacje.html#Wypozyczenie">Wypozyczenie</a></dd>
+<dd><a href="operacje.html#Base">Base</a></dd>
+<dd><a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a></dd>
+<dd><a href="sqlalchemy.inspection.html#Inspectable">sqlalchemy.inspection.Inspectable</a></dd>
+<dd><a href="typing.html#Generic">typing.Generic</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Wypozyczenie-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><tt>A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+&nbsp;<br>
+Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+values&nbsp;in&nbsp;``kwargs``.<br>
+&nbsp;<br>
+Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</tt></dd></dl>
+
+<dl><dt><a name="Wypozyczenie-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>data_wypozyczenia</strong></dt>
+</dl>
+<dl><dt><strong>id</strong></dt>
+</dl>
+<dl><dt><strong>ksiazka</strong></dt>
+</dl>
+<dl><dt><strong>ksiazka_id</strong></dt>
+</dl>
+<dl><dt><strong>przyjaciel</strong></dt>
+</dl>
+<dl><dt><strong>przyjaciel_id</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1c1207d5750; Wypozyczenie&gt;</dl>
+
+<dl><dt><strong>__parameters__</strong> = ()</dl>
+
+<dl><dt><strong>__table__</strong> = Table('Wypozyczenia', MetaData(), Column('id', I...ElementColumnDefault('2025-01-10')), schema=None)</dl>
+
+<dl><dt><strong>__table_args__</strong> = (ForeignKeyConstraint(&lt;sqlalchemy.sql.base.ReadOn...lementColumnDefault('2025-01-10')), schema=None)),)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'Wypozyczenia'</dl>
+
+<hr>
+Data and other attributes inherited from <a href="operacje.html#Base">Base</a>:<br>
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Class methods inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><a name="Wypozyczenie-__init_subclass__"><strong>__init_subclass__</strong></a>(**kw: 'Any') -&gt; 'None'<font color="#909090"><font face="helvetica, arial"> from <a href="sqlalchemy.orm.decl_api.html#DeclarativeAttributeIntercept">sqlalchemy.orm.decl_api.DeclarativeAttributeIntercept</a></font></font></dt><dd><tt>This&nbsp;method&nbsp;is&nbsp;called&nbsp;when&nbsp;a&nbsp;class&nbsp;is&nbsp;subclassed.<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;implementation&nbsp;does&nbsp;nothing.&nbsp;It&nbsp;may&nbsp;be<br>
+overridden&nbsp;to&nbsp;extend&nbsp;subclasses.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="sqlalchemy.orm.decl_api.html#DeclarativeBase">sqlalchemy.orm.decl_api.DeclarativeBase</a>:<br>
+<dl><dt><strong>__orig_bases__</strong> = (sqlalchemy.inspection.Inspectable[sqlalchemy.orm.state.InstanceState[typing.Any]],)</dl>
+
+<hr>
+Class methods inherited from <a href="typing.html#Generic">typing.Generic</a>:<br>
+<dl><dt><a name="Wypozyczenie-__class_getitem__"><strong>__class_getitem__</strong></a>(params)<font color="#909090"><font face="helvetica, arial"> from <a href="sqlalchemy.orm.decl_api.html#DeclarativeAttributeIntercept">sqlalchemy.orm.decl_api.DeclarativeAttributeIntercept</a></font></font></dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-create_engine_sqlalchemy"><strong>create_engine_sqlalchemy</strong></a>()</dt><dd><tt>Tworzy&nbsp;silnik&nbsp;do&nbsp;połączenia&nbsp;z&nbsp;bazą&nbsp;danych&nbsp;SQL&nbsp;Server.<br>
+&nbsp;<br>
+:return:&nbsp;Obiekt&nbsp;silnika&nbsp;SQLAlchemy&nbsp;(engine).</tt></dd></dl>
+ <dl><dt><a name="-dodaj_ksiazke"><strong>dodaj_ksiazke</strong></a>(session, autor, tytul, rok_wydania)</dt><dd><tt>Dodaje&nbsp;nową&nbsp;książkę&nbsp;do&nbsp;bazy&nbsp;danych&nbsp;i&nbsp;zapisuje&nbsp;dane&nbsp;do&nbsp;pliku&nbsp;JSON.<br>
+&nbsp;<br>
+:param&nbsp;session:&nbsp;Sesja&nbsp;bazy&nbsp;danych&nbsp;SQLAlchemy.<br>
+:param&nbsp;autor:&nbsp;Autor&nbsp;książki.<br>
+:param&nbsp;tytul:&nbsp;Tytuł&nbsp;książki.<br>
+:param&nbsp;rok_wydania:&nbsp;Rok&nbsp;wydania&nbsp;książki.</tt></dd></dl>
+ <dl><dt><a name="-dodaj_przyjaciela"><strong>dodaj_przyjaciela</strong></a>(session, imie, email)</dt><dd><tt>Dodaje&nbsp;nowego&nbsp;przyjaciela&nbsp;do&nbsp;bazy&nbsp;danych,&nbsp;zapisuje&nbsp;zmiany&nbsp;<br>
+i&nbsp;aktualizuje&nbsp;plik&nbsp;JSON&nbsp;z&nbsp;listą&nbsp;przyjaciół.<br>
+&nbsp;<br>
+:param&nbsp;session:&nbsp;Sesja&nbsp;bazy&nbsp;danych&nbsp;SQLAlchemy.<br>
+:param&nbsp;imie:&nbsp;Imię&nbsp;nowego&nbsp;przyjaciela.<br>
+:param&nbsp;email:&nbsp;Adres&nbsp;email&nbsp;nowego&nbsp;przyjaciela.</tt></dd></dl>
+ <dl><dt><a name="-lista_ksiazek"><strong>lista_ksiazek</strong></a>(session)</dt><dd><tt>Pobiera&nbsp;listę&nbsp;wszystkich&nbsp;książek&nbsp;z&nbsp;bazy&nbsp;danych&nbsp;i&nbsp;wypisuje&nbsp;je&nbsp;na&nbsp;konsolę.<br>
+&nbsp;<br>
+:param&nbsp;session:&nbsp;Sesja&nbsp;bazy&nbsp;danych&nbsp;SQLAlchemy.</tt></dd></dl>
+ <dl><dt><a name="-lista_przyjaciol"><strong>lista_przyjaciol</strong></a>(session)</dt><dd><tt>Pobiera&nbsp;listę&nbsp;wszystkich&nbsp;przyjaciół&nbsp;z&nbsp;bazy&nbsp;danych&nbsp;i&nbsp;wypisuje&nbsp;ich&nbsp;na&nbsp;konsolę.<br>
+&nbsp;<br>
+:param&nbsp;session:&nbsp;Sesja&nbsp;bazy&nbsp;danych&nbsp;SQLAlchemy.</tt></dd></dl>
+ <dl><dt><a name="-oddaj_ksiazke"><strong>oddaj_ksiazke</strong></a>(session, ksiazka_id)</dt><dd><tt>Przyjmuje&nbsp;sesję&nbsp;bazy&nbsp;danych&nbsp;oraz&nbsp;identyfikator&nbsp;książki,<br>
+a&nbsp;następnie&nbsp;sprawdza,&nbsp;czy&nbsp;książka&nbsp;jest&nbsp;wypożyczona.&nbsp;Jeśli&nbsp;tak,&nbsp;dokonuje&nbsp;zwrotu<br>
+książki,&nbsp;aktualizuje&nbsp;bazę&nbsp;danych&nbsp;oraz&nbsp;plik&nbsp;JSON&nbsp;z&nbsp;wypożyczeniami.<br>
+&nbsp;<br>
+:param&nbsp;session:&nbsp;Sesja&nbsp;bazy&nbsp;danych&nbsp;SQLAlchemy.<br>
+:param&nbsp;ksiazka_id:&nbsp;Identyfikator&nbsp;książki&nbsp;do&nbsp;zwrotu.</tt></dd></dl>
+ <dl><dt><a name="-stworz_parser"><strong>stworz_parser</strong></a>()</dt><dd><tt>Tworzy&nbsp;parser&nbsp;argumentów&nbsp;wykorzystywany&nbsp;w&nbsp;aplikacji</tt></dd></dl>
+ <dl><dt><a name="-stworz_tabele"><strong>stworz_tabele</strong></a>(engine)</dt><dd><tt>Tworzy&nbsp;wszystkie&nbsp;tabele&nbsp;w&nbsp;bazie&nbsp;danych&nbsp;na&nbsp;podstawie&nbsp;zdefiniowanych&nbsp;modeli.<br>
+&nbsp;<br>
+:param&nbsp;engine:&nbsp;Obiekt&nbsp;silnika&nbsp;SQLAlchemy.</tt></dd></dl>
+ <dl><dt><a name="-wypozycz_ksiazke"><strong>wypozycz_ksiazke</strong></a>(session, ksiazka_id, przyjaciel_id)</dt><dd><tt>Wypożycza&nbsp;książkę&nbsp;przyjacielowi,&nbsp;jeśli&nbsp;książka&nbsp;nie&nbsp;jest&nbsp;już&nbsp;wypożyczona.<br>
+&nbsp;<br>
+:param&nbsp;session:&nbsp;Sesja&nbsp;bazy&nbsp;danych&nbsp;SQLAlchemy.<br>
+:param&nbsp;ksiazka_id:&nbsp;ID&nbsp;książki&nbsp;do&nbsp;wypożyczenia.<br>
+:param&nbsp;przyjaciel_id:&nbsp;ID&nbsp;przyjaciela&nbsp;wypożyczającego&nbsp;książkę.</tt></dd></dl>
+ <dl><dt><a name="-zaladuj_dane_z_plikow"><strong>zaladuj_dane_z_plikow</strong></a>(session)</dt><dd><tt>Ładuje&nbsp;dane&nbsp;z&nbsp;plików&nbsp;JSON&nbsp;i&nbsp;dodaje&nbsp;je&nbsp;do&nbsp;sesji.<br>
+Otwiera&nbsp;trzy&nbsp;pliki&nbsp;JSON:&nbsp;'ksiazki.json',&nbsp;'przyjaciele.json'&nbsp;oraz&nbsp;'wypozyczenia.json'.<br>
+Następnie&nbsp;ładuje&nbsp;dane&nbsp;z&nbsp;tych&nbsp;plików&nbsp;i&nbsp;dodaje&nbsp;je&nbsp;do&nbsp;sesji&nbsp;za&nbsp;pomocą&nbsp;odpowiednich&nbsp;funkcji:<br>
+`dodaj_ksiazke`,&nbsp;`dodaj_przyjaciela`&nbsp;oraz&nbsp;`wypozycz_ksiazke`.<br>
+&nbsp;<br>
+:param&nbsp;session:&nbsp;Sesja&nbsp;bazy&nbsp;danych&nbsp;SQLAlchemy.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>annotations</strong> = _Feature((3, 7, 0, 'beta', 1), (3, 11, 0, 'alpha', 0), 16777216)</td></tr></table>
+</body></html>
