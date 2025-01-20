@@ -4,9 +4,13 @@ from flask import Flask, jsonify, request
 from sqlalchemy import Column
 from sqlalchemy.orm import sessionmaker, scoped_session
 from operacje import create_engine_sqlalchemy, Ksiazka, Base, Uzytkownik
-from functools import wraps
+from functools import wraps, lru_cache, cache
+from flask_caching import Cache
 
 app = Flask(__name__)
+app.config['CACHE_TYPE'] = 'SimpleCache'
+app.config['CACHE_DEFAULT_TIMEOUT'] = 300
+cache = Cache(app)
 
 engine = create_engine_sqlalchemy()
 Base.metadata.create_all(engine)
@@ -27,6 +31,7 @@ def auth_required(f):
 
 @app.route('/')
 @auth_required
+#@cache.cached(timeout=60)
 def home() -> str:
     """
     Endpoint dla strony głównej z logowaniem.
@@ -38,12 +43,13 @@ def home() -> str:
     #         user = session.query(Uzytkownik).filter_by(
     #             login=auth.username, haslo=auth.password).first()
     #         if user:
-    #             return "<h1>Przyjacielskie wypożyczenia książek!</h1>"
-    return make_response("<h1>Access denied</h1>", 401, {'WWW-Authenticate': 'Basic realm="Login Required!"'})
+    return  make_response("<h1>Przyjacielskie wypożyczenia książek!</h1>")
+    #return make_response("<h1>Access denied</h1>", 401, {'WWW-Authenticate': 'Basic realm="Login Required!"'})
 
 
 @app.route('/ksiazki', methods=['GET'])
 @auth_required
+@cache.cached(timeout=60)
 def get_all_ksiazki() -> ResponseReturnValue:
     """
     Endpoint do pobierania listy wszystkich książek.
@@ -62,6 +68,7 @@ def get_all_ksiazki() -> ResponseReturnValue:
 
 @app.route('/ksiazka/<int:id>', methods=['GET'])
 @auth_required
+@cache.cached(timeout=60)
 def get_ksiazka(id: int) -> ResponseReturnValue:
     """
     Endpoint do pobierania szczegółów konkretnej książki na podstawie jej ID.
