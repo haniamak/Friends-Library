@@ -1,9 +1,10 @@
-from flask import Response, make_response
+from flask import Response, make_response, request
 from flask.typing import ResponseReturnValue
 from flask import Flask, jsonify, request
 from sqlalchemy import Column
 from sqlalchemy.orm import sessionmaker, scoped_session
-from operacje import create_engine_sqlalchemy, Ksiazka, Base
+from operacje import create_engine_sqlalchemy, Ksiazka, Base, Uzytkownik
+from functools import wraps
 
 app = Flask(__name__)
 
@@ -11,17 +12,38 @@ engine = create_engine_sqlalchemy()
 Base.metadata.create_all(engine)
 SessionLocal = scoped_session(sessionmaker(bind=engine))
 
+def auth_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        auth = request.authorization
+        if auth:
+            with SessionLocal() as session:
+                user = session.query(Uzytkownik).filter_by(
+                login=auth.username, haslo=auth.password).first()
+            if user:
+                return f(*args, **kwargs)
+        return make_response("<h1>Access denied</h1>", 401, {'WWW-Authenticate': 'Basic realm="Login Required!"'})
+    return decorated_function
 
 @app.route('/')
+@auth_required
 def home() -> str:
     """
-    Endpoint dla strony głównej.
-    :return: Prosty tekst HTML z tytułem aplikacji.
+    Endpoint dla strony głównej z logowaniem.
+    Sprawdza dane użytkownika w tabeli Uzytkownicy.
     """
-    return "<h1>Przyjacielskie wypozyczenia ksiazek</h1>"
+    # auth = request.authorization
+    # if auth:
+    #     with SessionLocal() as session:
+    #         user = session.query(Uzytkownik).filter_by(
+    #             login=auth.username, haslo=auth.password).first()
+    #         if user:
+    #             return "<h1>Przyjacielskie wypożyczenia książek!</h1>"
+    return make_response("<h1>Access denied</h1>", 401, {'WWW-Authenticate': 'Basic realm="Login Required!"'})
 
 
 @app.route('/ksiazki', methods=['GET'])
+@auth_required
 def get_all_ksiazki() -> ResponseReturnValue:
     """
     Endpoint do pobierania listy wszystkich książek.
@@ -39,6 +61,7 @@ def get_all_ksiazki() -> ResponseReturnValue:
 
 
 @app.route('/ksiazka/<int:id>', methods=['GET'])
+@auth_required
 def get_ksiazka(id: int) -> ResponseReturnValue:
     """
     Endpoint do pobierania szczegółów konkretnej książki na podstawie jej ID.

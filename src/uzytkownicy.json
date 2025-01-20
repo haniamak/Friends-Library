@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "login": "hania",
+        "haslo": "mak"
+    },
+    {
+        "id": 2,
+        "login": "piotr",
+        "haslo": "nowak"
+    },
+    {
+        "id": 3,
+        "login": "kasia",
+        "haslo": "kowalska"
+    },
+    {
+        "id": 4,
+        "login": "olek",
+        "haslo": "op"
+    },
+    {
+        "id": 5,
+        "login": "marek",
+        "haslo": "mm"
+    },
+    {
+        "id": 6,
+        "login": "max",
+        "haslo": "m"
+    }
+]

@@ -80,6 +80,16 @@ class Ksiazka(Base):
         self.tytul = tytul
         self.rok_wydania = rok_wydania
 
+class Uzytkownik(Base):
+    __tablename__ = 'Uzytkownicy'
+    id: Column[int] = Column(Integer, primary_key=True)
+    login: Column[str] = Column(String(255), nullable=False, unique=True)
+    haslo: Column[str] = Column(String(255), nullable=False)
+
+    def __init__(self, login: Column[str], haslo: Column[str]):
+        self.login = login
+        self.haslo = haslo
+    
 
 class Przyjaciel(Base):
     """
@@ -208,6 +218,24 @@ def dodaj_przyjaciela(session, imie: Column[str], email: Column[str]) -> None:
     with open('przyjaciele.json', 'w', encoding='utf-8') as f:
         json.dump(przyjaciele_json, f, ensure_ascii=False, indent=4)
 
+def dodaj_uzytkownika(session, login: Column[str], haslo: Column[str]) -> None:
+    """
+    Dodaje nowego użytkownika do bazy danych, zapisuje zmiany
+    i aktualizuje plik JSON z listą użytkowników.
+
+    :param session: Sesja bazy danych SQLAlchemy.
+    :param login: Login nowego użytkownika.
+    :param haslo: Hasło nowego użytkownika.
+    """
+    uzytkownik = Uzytkownik(login=login, haslo=haslo)
+    session.add(uzytkownik)
+    session.commit()
+    print(f"Uzytkownik {uzytkownik.login} zostal dodany.")
+    uzytkownicy = session.query(Uzytkownik).all()
+    uzytkownicy_json = [{"id": u.id, "login": u.login,
+                         "haslo": u.haslo} for u in uzytkownicy]
+    with open('uzytkownicy.json', 'w', encoding='utf-8') as f:
+        json.dump(uzytkownicy_json, f, ensure_ascii=False, indent=4)
 
 def wypozycz_ksiazke(
         session,
@@ -317,6 +345,8 @@ def zaladuj_dane_z_plikow(session) -> None:
         przyjaciele = json.load(f)
     with open('wypozyczenia.json', 'r', encoding='utf-8') as f:
         wypozyczenia = json.load(f)
+    with open('uzytkownicy.json', 'r', encoding='utf-8') as f:
+        uzytkownicy = json.load(f)
 
     for ksiazka in ksiazki:
         dodaj_ksiazke(session, ksiazka["autor"],
@@ -328,6 +358,9 @@ def zaladuj_dane_z_plikow(session) -> None:
     for wypozyczenie in wypozyczenia:
         wypozycz_ksiazke(
             session, wypozyczenie["ksiazka_id"], wypozyczenie["przyjaciel_id"])
+    
+    for uzytkownik in uzytkownicy:
+        dodaj_uzytkownika(session, uzytkownik["login"], uzytkownik["haslo"])
 
 
 def stworz_parser() -> argparse.ArgumentParser:
