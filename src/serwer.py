@@ -1,6 +1,7 @@
 from flask import Response, make_response
 from flask.typing import ResponseReturnValue
 from flask import Flask, jsonify, request
+from sqlalchemy import Column
 from sqlalchemy.orm import sessionmaker, scoped_session
 from operacje import create_engine_sqlalchemy, Ksiazka, Base
 
@@ -42,7 +43,8 @@ def get_ksiazka(id: int) -> ResponseReturnValue:
     """
     Endpoint do pobierania szczegółów konkretnej książki na podstawie jej ID.
     :param id: ID książki.
-    :return: Szczegóły książki w formacie JSON lub komunikat o błędzie, jeśli książka nie istnieje.
+    :return: Szczegóły książki w formacie JSON lub komunikat o błędzie,
+    jeśli książka nie istnieje.
     """
     with SessionLocal() as session:
         ksiazka = session.query(Ksiazka).filter_by(id=id).first()
@@ -62,7 +64,8 @@ def delete_ksiazka(id: int) -> ResponseReturnValue:
     """
     Endpoint do usuwania książki na podstawie jej ID.
     :param id: ID książki do usunięcia.
-    :return: Status operacji w formacie JSON lub komunikat o błędzie, jeśli książka nie istnieje.
+    :return: Status operacji w formacie JSON lub komunikat o błędzie,
+    jeśli książka nie istnieje.
     """
     with SessionLocal() as session:
         ksiazka = session.query(Ksiazka).get(id)
@@ -77,7 +80,10 @@ def delete_ksiazka(id: int) -> ResponseReturnValue:
 
 @app.route('/ksiazka/<string:autor>/<string:tytul>/<int:rok_wydania>',
            methods=['POST'])
-def dodaj_ksiazke(autor: str, tytul: str, rok_wydania: int) -> ResponseReturnValue:
+def dodaj_ksiazke(
+        autor: Column[str],
+        tytul: Column[str],
+        rok_wydania: Column[int]) -> ResponseReturnValue:
     """
     Endpoint do dodawania nowej książki.
     :param autor: Autor książki.
@@ -98,22 +104,29 @@ def update_ksiazka(id: int) -> ResponseReturnValue:
     """
     Endpoint do aktualizowania szczegółów istniejącej książki.
     :param id: ID książki do zaktualizowania.
-    :return: Status operacji w formacie JSON lub komunikat o błędzie, jeśli książka nie istnieje.
+    :return: Status operacji w formacie JSON lub komunikat o błędzie,
+    jeśli książka nie istnieje.
     """
     with SessionLocal() as session:
         ksiazka = session.query(Ksiazka).get(id)
         if ksiazka:
-            if not request.json is None:
-                ksiazka.autor = request.json['autor']
-                ksiazka.tytul = request.json['tytul']
-                ksiazka.rok_wydania = request.json['rok_wydania']
+            if request.json is not None:
+                data = request.json
+                autor = data.get('autor', ksiazka.autor)
+                tytul = data.get('tytul', ksiazka.tytul)
+                rok_wydania = data.get('rok_wydania', ksiazka.rok_wydania) 
+                ksiazka.autor = autor
+                ksiazka.tytul = tytul
+                ksiazka.rok_wydania = rok_wydania
                 session.commit()
                 print(f"Zaktualizowano ksiazke: {ksiazka}")
                 return jsonify({'message': 'OK'}), 204
             else:
-                return jsonify({'message': 'Brak danych do aktualizacji.'}), 400
+                return jsonify(
+                    {'message': 'Brak danych do aktualizacji.'}), 400
         else:
             return jsonify({"message": "Ksiazka nie istnieje."}), 404
+
 
 if __name__ == "__main__":
     """

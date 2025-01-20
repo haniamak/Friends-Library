@@ -3,12 +3,12 @@
         "id": 1,
         "ksiazka_id": 4,
         "przyjaciel_id": 3,
-        "data_wypozyczenia": "2025-01-10"
+        "data_wypozyczenia": "2025-01-20"
     },
     {
         "id": 2,
         "ksiazka_id": 3,
         "przyjaciel_id": 2,
-        "data_wypozyczenia": "2025-01-10"
+        "data_wypozyczenia": "2025-01-20"
     }
 ]

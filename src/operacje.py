@@ -7,6 +7,7 @@ from sqlalchemy.orm import DeclarativeBase, relationship
 import argparse
 from sqlalchemy.engine import Engine
 
+
 def create_engine_sqlalchemy() -> Engine:
     """
     Tworzy silnik do połączenia z bazą danych SQL Server.
@@ -18,7 +19,7 @@ def create_engine_sqlalchemy() -> Engine:
     engine = create_engine(
         f'mssql+pyodbc://{server}/{database}?'
         f'driver=ODBC+Driver+17+for+SQL+Server'
-        )
+    )
     return engine
 
 
@@ -55,16 +56,21 @@ class Ksiazka(Base):
             f"id={self.id}, autor='{self.autor}', "
             f"tytul='{self.tytul}', "
             f"rok_wydania={self.rok_wydania})"
-            )
+        )
 
-    def __init__(self, autor: Column[str], tytul: Column[str], rok_wydania: Column[int]):
+    def __init__(
+            self,
+            autor: Column[str],
+            tytul: Column[str],
+            rok_wydania: Column[int]):
         """
         Konstruktor klasy Ksiazka.
 
         :param autor: Autor książki.
         :param tytul: Tytuł książki.
         :param rok_wydania: Rok wydania książki (musi być > 0).
-        :raises ValueError: Jeśli rok wydania jest niedodatni lub autor jest pusty.
+        :raises ValueError: Jeśli rok wydania jest niedodatni
+        lub autor jest pusty.
         """
         if rok_wydania <= 0:
             raise ValueError("Rok wydania musi być dodatni.")
@@ -98,7 +104,7 @@ class Przyjaciel(Base):
             f"Przyjaciel("
             f"id={self.id}, imie='{self.imie}', "
             f"email='{self.email}')"
-            )
+        )
 
     def __init__(self, imie: Column[str], email: Column[str]):
         """
@@ -123,11 +129,13 @@ class Wypozyczenie(Base):
     :param id: Klucz główny (unikalny identyfikator wypożyczenia).
     :param ksiazka_id: Id książki powiązanej z wypożyczeniem.
     :param przyjaciel_id: Id przyjaciela powiązanego z wypożyczeniem.
-    :param data_wypozyczenia: Data wypożyczenia książki (domyślnie bieżąca data).
+    :param data_wypozyczenia: Data wypożyczenia książki
+    (domyślnie bieżąca data).
     """
     __tablename__ = 'Wypozyczenia'
     id: Column[int] = Column(Integer, primary_key=True)
-    ksiazka_id: Column[int] = Column(Integer, ForeignKey('Ksiazki.id'), nullable=False)
+    ksiazka_id: Column[int] = Column(
+        Integer, ForeignKey('Ksiazki.id'), nullable=False)
     przyjaciel_id: Column[int] = Column(Integer, ForeignKey(
         'Przyjaciele.id'), nullable=False)
     data_wypozyczenia: Column[str] = Column(
@@ -157,7 +165,11 @@ def stworz_tabele(engine: Engine) -> None:
     Base.metadata.create_all(engine)
 
 
-def dodaj_ksiazke(session, autor: Column[str], tytul: Column[str], rok_wydania: Column[int]) -> None:
+def dodaj_ksiazke(
+        session,
+        autor: Column[str],
+        tytul: Column[str],
+        rok_wydania: Column[int]) -> None:
     """
     Dodaje nową książkę do bazy danych i zapisuje dane do pliku JSON.
 
@@ -179,7 +191,7 @@ def dodaj_ksiazke(session, autor: Column[str], tytul: Column[str], rok_wydania: 
 
 def dodaj_przyjaciela(session, imie: Column[str], email: Column[str]) -> None:
     """
-    Dodaje nowego przyjaciela do bazy danych, zapisuje zmiany 
+    Dodaje nowego przyjaciela do bazy danych, zapisuje zmiany
     i aktualizuje plik JSON z listą przyjaciół.
 
     :param session: Sesja bazy danych SQLAlchemy.
@@ -197,10 +209,13 @@ def dodaj_przyjaciela(session, imie: Column[str], email: Column[str]) -> None:
         json.dump(przyjaciele_json, f, ensure_ascii=False, indent=4)
 
 
-def wypozycz_ksiazke(session, ksiazka_id: Column[int], przyjaciel_id: Column[int]) -> None:
+def wypozycz_ksiazke(
+        session,
+        ksiazka_id: Column[int],
+        przyjaciel_id: Column[int]) -> None:
     """
     Wypożycza książkę przyjacielowi, jeśli książka nie jest już wypożyczona.
-    
+
     :param session: Sesja bazy danych SQLAlchemy.
     :param ksiazka_id: ID książki do wypożyczenia.
     :param przyjaciel_id: ID przyjaciela wypożyczającego książkę.
@@ -237,8 +252,9 @@ def wypozycz_ksiazke(session, ksiazka_id: Column[int], przyjaciel_id: Column[int
 def oddaj_ksiazke(session, ksiazka_id: Column[int]) -> None:
     """
     Przyjmuje sesję bazy danych oraz identyfikator książki,
-    a następnie sprawdza, czy książka jest wypożyczona. Jeśli tak, dokonuje zwrotu
-    książki, aktualizuje bazę danych oraz plik JSON z wypożyczeniami.
+    a następnie sprawdza, czy książka jest wypożyczona.
+    Jeśli tak, dokonuje zwrotu książki, aktualizuje bazę
+    danych oraz plik JSON z wypożyczeniami.
 
     :param session: Sesja bazy danych SQLAlchemy.
     :param ksiazka_id: Identyfikator książki do zwrotu.
@@ -274,7 +290,8 @@ def lista_ksiazek(session) -> None:
 
 def lista_przyjaciol(session) -> None:
     """
-    Pobiera listę wszystkich przyjaciół z bazy danych i wypisuje ich na konsolę.
+    Pobiera listę wszystkich przyjaciół z bazy danych
+    i wypisuje ich na konsolę.
 
     :param session: Sesja bazy danych SQLAlchemy.
 
@@ -286,9 +303,10 @@ def lista_przyjaciol(session) -> None:
 
 def zaladuj_dane_z_plikow(session) -> None:
     """
-    Ładuje dane z plików JSON i dodaje je do sesji.
-    Otwiera trzy pliki JSON: 'ksiazki.json', 'przyjaciele.json' oraz 'wypozyczenia.json'.
-    Następnie ładuje dane z tych plików i dodaje je do sesji za pomocą odpowiednich funkcji:
+    Ładuje dane z plików JSON i dodaje je do sesji. 
+    Otwiera trzy pliki JSON: 'ksiazki.json', 'przyjaciele.json'
+    oraz 'wypozyczenia.json'. Następnie ładuje dane z tych plików
+    i dodaje je do sesji za pomocą odpowiednich funkcji: 
     `dodaj_ksiazke`, `dodaj_przyjaciela` oraz `wypozycz_ksiazke`.
 
     :param session: Sesja bazy danych SQLAlchemy.
